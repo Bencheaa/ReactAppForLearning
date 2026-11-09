@@ -34,37 +34,52 @@ function ShoppingList() {
   const unpurchasedCount = items.filter((item) => !item.purchased).length
 
   return (
-    <section>
-      <h2>Shopping list</h2>
-      <form onSubmit={addItem}>
-        <label>
-          Item
-          <input
-            type="text"
-            value={newItemName}
-            onChange={(event) => setNewItemName(event.target.value)}
-          />
-        </label>
-        <button type="submit">Add item</button>
+    <section className="shopping-card" id="shopping-list">
+      <div className="card-header">
+        <div className="list-title">
+          <span className="list-icon">⌑</span>
+          <div>
+            <h3>Shopping list</h3>
+            <p>{items.length ? `${unpurchasedCount} items left to get` : 'Plan your next shop'}</p>
+          </div>
+        </div>
+        <button className="more-button" type="button" aria-label="More list options">•••</button>
+      </div>
+      <form className="add-item-form" onSubmit={addItem}>
+        <label className="sr-only" htmlFor="new-item">Add an item</label>
+        <input
+          id="new-item"
+          type="text"
+          value={newItemName}
+          onChange={(event) => setNewItemName(event.target.value)}
+          placeholder="Add something to your list..."
+        />
+        <button className="add-button" type="submit" aria-label="Add item">+</button>
       </form>
-      <p>Unpurchased items: {unpurchasedCount}</p>
-      <ul>
+      <ul className="shopping-items">
         {items.map((item) => (
           <li key={item.id}>
-            <label>
+            <label className={item.purchased ? 'purchased' : ''}>
               <input
                 type="checkbox"
                 checked={item.purchased}
                 onChange={() => toggleItem(item.id)}
               />
-              {item.name}
+              <span className="custom-checkbox" />
+              <span>{item.name}</span>
             </label>
-            <button type="button" onClick={() => removeItem(item.id)}>
-              Remove
+            <button className="remove-button" type="button" onClick={() => removeItem(item.id)} aria-label={`Remove ${item.name}`}>
+              ×
             </button>
           </li>
         ))}
       </ul>
+      {!items.length && (
+        <div className="empty-list">
+          <span aria-hidden="true">✦</span>
+          <p>Your list is ready when you are.</p>
+        </div>
+      )}
     </section>
   )
 }
