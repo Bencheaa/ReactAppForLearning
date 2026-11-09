@@ -1,17 +1,15 @@
 import './App.css'
-import Welcome from './Welcome'
-import Counter from './Counter'
-import NameForm from './NameForm'
-import TodoList from './TodoList'
+import ScoreControls from './ScoreControls'
+import EditableProfile from './EditableProfile'
+import ShoppingList from './ShoppingList'
 
 function App() {
   return (
     <div className="App">
-      <h1>React notes</h1>
-      <Welcome name="Alice" age={25} />
-      <Counter />
-      <NameForm />
-      <TodoList />
+      <h1>useState exercises</h1>
+      <ScoreControls />
+      <EditableProfile />
+      <ShoppingList />
     </div>
   )
 }
